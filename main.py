@@ -15,11 +15,9 @@ day_groups = temps.groupby(['MONTH', 'DAY'])
 
 record_highs = day_groups['TMAX'].max()
 min_high_temps = day_groups['TMAX'].min()
-print(min_high_temps)
 
 record_lows = day_groups['TMIN'].min()
 max_low_temps = day_groups['TMIN'].max()
-print(max_low_temps)
 
 plt.figure(figsize=(19.2, 10.8))
 plt.title(f'Rexburg, ID Temperatures ({start_date} to {end_date})', fontsize=32)
