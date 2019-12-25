@@ -20,6 +20,7 @@ record_lows = day_groups['TMIN'].min()
 max_low_temps = day_groups['TMIN'].max()
 print(max_low_temps)
 
+plt.figure(figsize=(19.2, 10.8))
 record_highs.plot(label='Record Highs')
 min_high_temps.plot(label='Minimum Highs')
 max_low_temps.plot(label='Maximum Lows')
