@@ -4,11 +4,13 @@ import matplotlib.pyplot as plt
 import pandas
 
 
-def main():
+def get_args():
     parser = OptionParser()
     (_, args) = parser.parse_args()
-    filename, = args
+    return args
 
+
+def load_data(filename):
     data = pandas.read_csv(filename)
     temps = data[data['NAME'].str.contains('REXBURG')][['DATE', 'TMAX', 'TMIN']]
     temps['DATE'] = pandas.to_datetime(temps['DATE'])
@@ -25,7 +27,10 @@ def main():
 
     record_lows = day_groups['TMIN'].min()
     max_low_temps = day_groups['TMIN'].max()
+    return end_date, max_low_temps, min_high_temps, record_highs, record_lows, start_date
 
+
+def plot_data(end_date, max_low_temps, min_high_temps, record_highs, record_lows, start_date):
     plt.figure(figsize=(19.2, 10.8))
     plt.title(f'Rexburg, ID Temperatures ({start_date} to {end_date})', fontsize=32)
     record_highs.plot(label='Record Highs')
@@ -34,6 +39,12 @@ def main():
     record_lows.plot(label='Record Lows')
     plt.legend(prop={'size': 16})
     plt.savefig('climate.png')
+
+
+def main():
+    filename, = get_args()
+    end_date, max_low_temps, min_high_temps, record_highs, record_lows, start_date = load_data(filename)
+    plot_data(end_date, max_low_temps, min_high_temps, record_highs, record_lows, start_date)
 
 
 if __name__ == '__main__':
