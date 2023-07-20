@@ -1,7 +1,13 @@
+from optparse import OptionParser
+
 import matplotlib.pyplot as plt
 import pandas
 
-data = pandas.read_csv('1983182.csv')
+parser = OptionParser()
+(_, args) = parser.parse_args()
+filename, = args
+
+data = pandas.read_csv(filename)
 temps = data[data['NAME'].str.contains('REXBURG')][['DATE', 'TMAX', 'TMIN']]
 temps['DATE'] = pandas.to_datetime(temps['DATE'])
 start_date = temps['DATE'].min().date()
