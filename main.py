@@ -38,7 +38,7 @@ def plot_data(end_date, max_low_temps, min_high_temps, record_highs, record_lows
     max_low_temps.plot(label='Maximum Lows')
     record_lows.plot(label='Record Lows')
     plt.legend(prop={'size': 16})
-    plt.savefig('climate.png')
+    plt.show()
 
 
 def main():
